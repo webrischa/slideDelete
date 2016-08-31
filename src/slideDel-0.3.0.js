@@ -144,14 +144,19 @@
       };
       $ad(sd.$d, $a);
     };
-
+    /**
+     * 控制元素滑动的方法
+     */
     var translate = function(move, speed, el) {
       if (!el) var el = sd.it;
       element = el.style;
       element.webkitTransitionDuration = element.MozTransitionDuration = element.msTransitionDuration = element.OTransitionDuration = element.transitionDuration = speed + 'ms';
       element.webkitTransform = element.MozTransform = element.msTransform = element.OTransform = element.transform = 'translate(' + move + 'px,0) translateZ(0)';
     };
-
+    /**
+     * 判断最后的状态
+     * 做出相应的动作
+     */
     var doPlay = function(sl) {
       if (sd.fx == -sd.sw && sl <= sd.sw / 3 * 2) {
         sd.it.setAttribute('swidel', 'c');
@@ -167,7 +172,9 @@
         translate(0, 200);
       }
     };
-
+    /**
+     * 触控结束后的方法
+     */
     var tEnd = function(e) {
       sd.$e.removeEventListener(touchMove, tMove, false);
       sd.$e.removeEventListener(touchEnd, tEnd, false);
@@ -175,7 +182,9 @@
         Fx = parseInt(Dx.substring(10, Dx.indexOf('px')));
       doPlay(Math.abs(Fx));
     };
-
+    /**
+     * 触控中的方法
+     */
     var tMove = function(e) {
       if (hasTouch) {
         if (e.touches.length > 1 || e.scale && e.scale !== 1) return //多点或缩放
@@ -188,8 +197,6 @@
       }
       if (!sd.vy) {
         e.preventDefault();
-        //if (sd.it.childNodes) {}
-        //console.log(sd.fx, sd.mx)
         if (sd.fx == 0) {
           if (sd.mx <= -sd.sw) {
             sd.mx = -sd.sw;
@@ -206,8 +213,9 @@
         translate(sd.fx + sd.mx, 0);
       };
     };
-
-
+    /**
+     * 触控开始的方法
+     */
     var tStart = function(e) {
       var touch = hasTouch ? e.touches[0] : e,
         rdx = null,
@@ -226,17 +234,27 @@
       if(!sd.sa.length) sd.sw = sd.sh * sd.sl;
       sd.dx = sd.it.style.webkitTransform || sd.it.style.transform || sd.it.style.MozTransform || sd.it.style.msTransform || sd.it.style.OTransform || 'translate(0px,0) translateZ(0)';
       sd.fx = parseInt(sd.dx.substring(10, sd.dx.indexOf('px')));
-      if (sd.fx != -sd.sw) {
+      /**
+       * 判断当前元素是否为滑动后的元素
+       */
+      if (!sd.it.getAttribute('swidel') || sd.it.getAttribute('swidel') == 'c') {
         var list = document.querySelector('[swidel=o]');
         if (list) {
           list.setAttribute('swidel', 'c');
           translate(0, 200, list);
         };
+        /**
+         * 判断是否已添加按钮
+         */
         if (!sd.it.getAttribute('swidel')) {
           if ($gs(sd.it, 'position') == 'static') sd.it.style.position = 'relative';
           var $d = sd.$d.cloneNode(true);
           var childNs = $d.childNodes;
           var nowWidth = null;
+          /**
+           * 样式赋值
+           * 绑定方法
+           */
           for (var i = 0; i < sd.sl; i++) {
             nowWidth = sd.sa[i] || sd.sh;
             childNs[i].style.cssText = 'line-height:'+ sd.sh +'px;height:'+ sd.sh +'px;width:'+ nowWidth +'px';
