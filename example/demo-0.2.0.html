@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+  <meta name="format-detection" content="telephone=no">
+  <title>demo</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    ul{
+      list-style: none;
+      list-style-type: none;
+    }
+    li{
+      height: 50px;
+      padding: 10px 0;
+    }
+    li:nth-child(2n){
+      background:#000;
+    }
+    a{
+      text-decoration: none;
+      color:#333;
+    }
+  </style>
+</head>
+<body>
+  <ul id="app">
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+    <li class="del"></li>
+  </ul>
+  <script src="../plugins/zepto-1.1.6.min.js"></script>
+  <script src="../src/slideDel-0.2.0.js"></script>
+  <script>
+
+    Swidel({
+      mainCell: '#app',
+      slideCell: '.del',
+      delFn: function(el){
+        $(el).parent().remove();
+      }
+    });
+  </script>
+</body>
+</html>
