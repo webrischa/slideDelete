@@ -10,7 +10,7 @@
     };
   },
   /**
-   * 返回指定元素的符合要求的父级
+   * 返回指定元素的符合要求的父级(包含自身)
    * 类似于closest()
    * attribut{
    *   class: .abc,
@@ -25,14 +25,14 @@
     var $child = el;
     var $parent = '';
     function lp() {
-      $parent = $child.parentNode;
+      $parent = $child;
       if ($parent.tagName == 'HTML') return $parent = undefined;
-      $child = $parent;
+      $child = $parent.parentNode;
       if (type == 'c' && $parent.classList.contains(attribute.replace('.', ''))) {
         return $parent;
       }else if(type == 'i' && $parent.id == attribute.replace('#', '')){
         return $parent;
-      }else if(type == 't' && $parent.tagName == attribute){
+      }else if(type == 't' && $parent.tagName.toLocaleLowerCase() == attribute){
         return $parent;
       }else {
         lp();
@@ -107,7 +107,7 @@
     sd.mx = 0; //moveX
     sd.my = 0; //moveY
     sd.vy = undefined; //scrollY
-    sd.dx = 0; //translateDx
+    //sd.dx = 0; //translateDx
     sd.fx = 0; //translateFx
     sd.sh = 0; //slideHeight
     sd.sw = 0; //slideWidth
@@ -220,11 +220,7 @@
       var touch = hasTouch ? e.touches[0] : e,
         rdx = null,
         rfx = null;
-      if(e.target.classList.contains(sd.os.slideItem.replace('.', ''))){
-        sd.it = e.target;
-      }else{
-        sd.it = $gp(e.target, sd.os.slideItem);
-      };
+      sd.it = $gp(e.target, sd.os.slideItem);
       if (!sd.it) return;
       sd.mx = 0;
       sd.vy = undefined;
@@ -232,8 +228,8 @@
       sd.sy = touch.pageY;
       sd.sh = sd.it.offsetHeight;
       if(!sd.sa.length) sd.sw = sd.sh * sd.sl;
-      sd.dx = sd.it.style.webkitTransform || sd.it.style.transform || sd.it.style.MozTransform || sd.it.style.msTransform || sd.it.style.OTransform || 'translate(0px,0) translateZ(0)';
-      sd.fx = parseInt(sd.dx.substring(10, sd.dx.indexOf('px')));
+      //sd.dx = sd.it.style.webkitTransform || sd.it.style.transform || sd.it.style.MozTransform || sd.it.style.msTransform || sd.it.style.OTransform || 'translate(0px,0) translateZ(0)';
+      //sd.fx = parseInt(sd.dx.substring(10, sd.dx.indexOf('px')));
       /**
        * 判断当前元素是否为滑动后的元素
        */
@@ -280,7 +276,10 @@
           $ad(sd.it, $d);
           sd.it.setAttribute('swidel', 'c');
         };
-      };
+        sd.fx = 0;
+      }else{
+        sd.fx = -sd.sw;
+      }
       sd.$e.addEventListener(touchMove, tMove, false);
       sd.$e.addEventListener(touchEnd, tEnd, false);
     };
